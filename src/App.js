@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css'
 
-// const API = 'http://localhost:5000/api/users';
-const API = 'https://user-manager-backend.onrender.com/api/users';
+const API = 'http://localhost:5000/api/users';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -20,9 +19,7 @@ function App() {
 
   const addUser = async (e) => {
     e.preventDefault();
-    const res = await axios.post(API, form, {
-    headers: { 'Content-Type': 'application/json' }//Adding explicitly to handle render server issue
-  });
+    const res = await axios.post(API, form);
     setUsers([...users, res.data]);
     setForm({ name: '', email: '' });
   };

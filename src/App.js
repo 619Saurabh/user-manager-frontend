@@ -20,7 +20,9 @@ function App() {
 
   const addUser = async (e) => {
     e.preventDefault();
-    const res = await axios.post(API, form);
+    const res = await axios.post(API, form, {
+    headers: { 'Content-Type': 'application/json' }//Adding explicitly to handle render server issue
+  });
     setUsers([...users, res.data]);
     setForm({ name: '', email: '' });
   };

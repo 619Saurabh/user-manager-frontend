@@ -6,7 +6,7 @@ const API = 'http://localhost:5000/api/users';
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [form, setForm] = useState({ name: '', email: '' });
+  const [formData, setFormData] = useState({ name: '', email: '' });
   const [editUserId, setEditUserId] = useState(null); // null -> add mode
 
   useEffect(() => {
@@ -30,16 +30,16 @@ function App() {
 
     if (editUserId) {
       // Edit user (PUT)
-      const res = await axios.put(`${API}/${editUserId}`, form);
+      const res = await axios.put(`${API}/${editUserId}`, formData);
       setUsers(users.map((user)=> user.id === editUserId ? res.data : user));
       setEditUserId(null); // switch back to add mode
     } else {
       // Add user (POST)
-      const res = await axios.post(API, form);
+      const res = await axios.post(API, formData);
       setUsers([...users, res.data]);
     }
 
-    setForm({ name: '', email: '' });
+    setFormData({ name: '', email: '' });
   };
 
   const deleteUser = async (id) => {
@@ -48,13 +48,13 @@ function App() {
   };
 
   const startEdit = (user) => {
-    setForm({ name: user.name, email: user.email });
+    setFormData({ name: user.name, email: user.email });
     setEditUserId(user.id);
   };
 
   const cancelEdit = () => {
     setEditUserId(null);
-    setForm({ name: '', email: '' });
+    setFormData({ name: '', email: '' });
   };
 
   return (
@@ -64,15 +64,15 @@ function App() {
       <form onSubmit={handleSubmit}>
         <input
           placeholder="Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           required
         />
         <br/>
         <input
           placeholder="Email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           required
         />
         <br/>

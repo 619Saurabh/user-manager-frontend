@@ -6,7 +6,7 @@ const API = 'http://localhost:5000/api/users';
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [formData, setFormData] = useState({ name: '', email: ''});
   const [editUserId, setEditUserId] = useState(null); // null -> add mode
 
   useEffect(() => {

@@ -4,9 +4,6 @@ import axios from 'axios';
 
 jest.mock('axios');
 
-// App.test.js
-
-jest.mock('axios');
 
 const mockUsers = [
   { id: 1, name: 'Arjun', email: 'arjun@email.com' },
